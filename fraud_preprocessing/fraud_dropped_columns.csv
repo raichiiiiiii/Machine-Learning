@@ -1,0 +1,26 @@
+dropped_column
+Category Id
+Customer Email
+Customer Fname
+Customer Id
+Customer Lname
+Customer Password
+Customer Street
+Days for shipping (real)
+Delivery Status
+Department Id
+Late_delivery_risk
+Order Customer Id
+Order Id
+Order Item Id
+Order Item Total
+Order Profit Per Order
+Order Status
+Order Zipcode
+Product Card Id
+Product Category Id
+Product Description
+Product Price
+Product Status
+Type
+shipping date (DateOrders)

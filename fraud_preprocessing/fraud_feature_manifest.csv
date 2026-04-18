@@ -1,0 +1,37 @@
+column,role,encoding,dtype_before_numeric_table,n_unique,missing_after_cleaning
+Days for shipment (scheduled),feature,numeric,int64,4,0
+Benefit per order,feature,numeric,float64,21998,0
+Sales per customer,feature,numeric,float64,2927,0
+Category Name,feature,frequency,object,50,0
+Customer City,feature,frequency,object,563,0
+Customer Country,feature,one_hot,object,2,0
+Customer Segment,feature,one_hot,object,3,0
+Customer State,feature,frequency,object,46,0
+Customer Zipcode,feature,numeric,float64,995,0
+Department Name,feature,one_hot,object,11,0
+Latitude,feature,numeric,float64,11250,0
+Longitude,feature,numeric,float64,4487,0
+Market,feature,one_hot,object,5,0
+Order City,feature,frequency,object,3597,0
+Order Country,feature,frequency,object,164,0
+Order Item Cardprod Id,feature,numeric,int64,118,0
+Order Item Discount,feature,numeric,float64,1017,0
+Order Item Discount Rate,feature,numeric,float64,18,0
+Order Item Product Price,feature,numeric,float64,75,0
+Order Item Profit Ratio,feature,numeric,float64,162,0
+Order Item Quantity,feature,numeric,int64,5,0
+Sales,feature,numeric,float64,193,0
+Order Region,feature,frequency,object,23,0
+Order State,feature,frequency,object,1089,0
+Product Image,feature,frequency,object,118,0
+Product Name,feature,frequency,object,118,0
+Shipping Mode,feature,one_hot,object,4,0
+fraud,target,binary_target,int64,2,0
+order_year,feature,numeric,int32,4,0
+order_quarter,feature,numeric,int32,4,0
+order_month,feature,numeric,int32,12,0
+order_day,feature,numeric,int32,31,0
+order_weekday,feature,numeric,int32,7,0
+order_hour,feature,numeric,int32,24,0
+order_is_weekend,feature,numeric,Int64,2,0
+Customer Zipcode_was_missing,feature,numeric,int64,2,0
