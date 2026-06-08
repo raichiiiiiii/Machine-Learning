@@ -13,6 +13,7 @@ NOTEBOOKS = [
     "notebook/PCA.ipynb",
     "notebook/RNN.ipynb",
     "notebook/MLP.ipynb",
+    "notebook/Classical.ipynb",
     "notebook/RNN_analysis.ipynb",
     "notebook/MLP_analysis.ipynb",
 ]

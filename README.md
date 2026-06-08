@@ -1,11 +1,12 @@
 # Fraud Detection in DataCo Smart Supply Chain
 
-This repository explores fraud detection on transactional supply chain data using two deep learning approaches:
+This repository explores fraud detection on transactional supply chain data using deep learning and classical machine learning approaches:
 
 - **RNN-based model** (implemented with stacked **GRU** layers)
 - **MLP** (Multi-Layer Perceptron)
+- **Classical baselines** (Linear Regression-style Keras classifier, Decision Tree, Random Forest, and XGBoost)
 
-Both models are trained and compared on **three feature representations**:
+All model families are trained and compared on **three feature representations**:
 
 1. **Preprocessed numeric dataset**
 2. **Feature-selected dataset** using a **wrapper method**
@@ -34,7 +35,7 @@ To make it suitable for machine learning, the workflow:
 - removes leakage, identifiers, and irrelevant columns,
 - converts the data into a numeric modeling table,
 - creates alternative feature spaces,
-- trains two neural-network models on each feature space,
+- trains neural-network and classical baseline models on each feature space,
 - compares the resulting performance.
 
 ---
@@ -57,6 +58,10 @@ flowchart LR
     C --> I[MLP.ipynb]
     E --> I
     G --> I
+
+    C --> L[Classical.ipynb]
+    E --> L
+    G --> L
 
     H --> J[RNN_analysis.ipynb]
     I --> K[MLP_analysis.ipynb]
@@ -155,7 +160,7 @@ Generated outputs in `PCA/`:
 
 ### 4) Model Training
 
-Both deep learning models are trained on the following three datasets:
+The model notebooks are trained on the following three datasets:
 
 1. `fraud_prepared_numeric.csv`
 2. `fraud_selected_features_rfecv.csv`
@@ -187,9 +192,18 @@ The RNN notebook is implemented with **GRU layers** over reshaped tabular input:
 - Dropout(0.3)
 - Dense(1, Sigmoid)
 
-#### Shared training strategy
+#### Classical baseline models
 
-Both notebooks use:
+The classical notebook trains four baselines on the same three datasets:
+
+- Linear Regression-style Keras classifier: Input -> Dense(1, Sigmoid)
+- Decision Tree
+- Random Forest
+- XGBoost
+
+#### Shared training strategy for MLP and RNN
+
+The MLP and RNN notebooks use:
 
 - `train / validation / test` splitting
 - `StandardScaler`
@@ -206,6 +220,8 @@ Both notebooks use:
 - `EarlyStopping` monitored on validation PR-AUC
 - `ReduceLROnPlateau`
 - validation-based threshold tuning for the final binary decision
+
+The classical notebook uses the same train / validation / test split, `StandardScaler`, imbalance handling, validation-based threshold tuning, and the same classification metrics for comparison.
 
 ---
 
@@ -240,10 +256,15 @@ Machine-Learning/
 │   │   ├── csv/
 │   │   ├── figure/
 │   │   └── *.keras
-│   └── RNN/
+│   ├── RNN/
+│   │   ├── csv/
+│   │   ├── figure/
+│   │   └── *.keras
+│   └── Classical/
 │       ├── csv/
 │       ├── figure/
-│       └── *.keras
+│       ├── *.keras
+│       └── *.joblib
 │
 ├── notebook/
 │   ├── preprocess.ipynb
@@ -251,6 +272,7 @@ Machine-Learning/
 │   ├── PCA.ipynb
 │   ├── RNN.ipynb
 │   ├── MLP.ipynb
+│   ├── Classical.ipynb
 │   ├── RNN_analysis.ipynb
 │   └── MLP_analysis.ipynb
 │
@@ -311,8 +333,9 @@ python main.py
 3. `notebook/PCA.ipynb`
 4. `notebook/RNN.ipynb`
 5. `notebook/MLP.ipynb`
-6. `notebook/RNN_analysis.ipynb`
-7. `notebook/MLP_analysis.ipynb`
+6. `notebook/Classical.ipynb`
+7. `notebook/RNN_analysis.ipynb`
+8. `notebook/MLP_analysis.ipynb`
 
 This is the easiest way to reproduce the full workflow end to end.
 
@@ -327,8 +350,9 @@ Open the notebooks in order and execute them one by one:
 3. `PCA.ipynb`
 4. `RNN.ipynb`
 5. `MLP.ipynb`
-6. `RNN_analysis.ipynb`
-7. `MLP_analysis.ipynb`
+6. `Classical.ipynb`
+7. `RNN_analysis.ipynb`
+8. `MLP_analysis.ipynb`
 
 Recommended order is important because later notebooks depend on files produced by earlier ones.
 
@@ -336,9 +360,9 @@ Recommended order is important because later notebooks depend on files produced 
 
 ### Option 3 - Run the classical baseline comparison
 
-Open and execute `notebook/classical_ml_baselines.ipynb`.
+Open and execute `notebook/Classical.ipynb`.
 
-This notebook builds the late-delivery classification and sales-forecasting tasks from the raw DataCo dataset, applies wrapper feature selection and PCA feature extraction in memory, then compares Keras linear/logistic regression, Decision Tree, Random Forest, and XGBoost baselines.
+This notebook follows the existing fraud pipeline and trains Linear Regression-style Keras, Decision Tree, Random Forest, and XGBoost models on the preprocessed numeric, wrapper-selected, and PCA fraud datasets.
 
 The comparison outputs are saved in `model/Classical/`.
 
@@ -368,9 +392,11 @@ Saved to `model/MLP/` and `model/RNN/`:
 - analysis figures
 
 Classical baseline outputs are saved to `model/Classical/`:
-- late-delivery classification comparison CSV
-- sales-regression comparison CSV
-- metric comparison figures
+- trained `.keras` and `.joblib` models
+- Keras linear model history CSV files
+- test prediction CSV files
+- comparison result CSV files
+- confusion matrix, ROC/PR curve, and metric comparison figures
 
 ---
 
@@ -408,7 +434,7 @@ Possible extensions for this repository:
 - add a `requirements.txt`
 - add experiment tracking
 - add hyperparameter tuning
-- compare against classical baselines such as Logistic Regression, Random Forest, or XGBoost
+- add hyperparameter tuning for the classical baselines
 - document final benchmark results in a dedicated results section
 
 ---
