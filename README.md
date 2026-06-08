@@ -283,7 +283,7 @@ source .venv/bin/activate
 ### Install required packages
 
 ```bash
-pip install numpy pandas scikit-learn tensorflow matplotlib nbformat nbclient ipykernel
+pip install numpy pandas scikit-learn tensorflow xgboost matplotlib nbformat nbclient ipykernel
 ```
 
 ### Optional: install Jupyter notebook support
@@ -334,6 +334,16 @@ Recommended order is important because later notebooks depend on files produced 
 
 ---
 
+### Option 3 - Run the classical baseline comparison
+
+Open and execute `notebook/classical_ml_baselines.ipynb`.
+
+This notebook builds the late-delivery classification and sales-forecasting tasks from the raw DataCo dataset, applies wrapper feature selection and PCA feature extraction in memory, then compares Keras linear/logistic regression, Decision Tree, Random Forest, and XGBoost baselines.
+
+The comparison outputs are saved in `model/Classical/`.
+
+---
+
 ## Outputs
 
 ### Preprocessing outputs
@@ -356,6 +366,11 @@ Saved to `model/MLP/` and `model/RNN/`:
 - test prediction CSV files
 - comparison result CSV files
 - analysis figures
+
+Classical baseline outputs are saved to `model/Classical/`:
+- late-delivery classification comparison CSV
+- sales-regression comparison CSV
+- metric comparison figures
 
 ---
 

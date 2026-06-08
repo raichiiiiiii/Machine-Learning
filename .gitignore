@@ -1,0 +1,6 @@
+# Optional large exports from notebook/classical_ml_baselines.ipynb
+classical_preprocessing/
+wrapper/late_delivery_wrapper_selected_features_rfe.csv
+wrapper/sales_wrapper_selected_features_rfe.csv
+PCA/late_delivery_pca_95_variance.csv
+PCA/sales_pca_95_variance.csv
